@@ -43,8 +43,12 @@ func main() {
 		if len(pass) == 0 {
 			panic("密码不能为空")
 		}
-		conf.Credentials = socks5.StaticCredentials{
+		cator := socks5.UserPassAuthenticator{Credentials: socks5.StaticCredentials{
 			user: pass,
+		}}
+
+		conf.AuthMethods = []socks5.Authenticator{
+			cator,
 		}
 	}
 
